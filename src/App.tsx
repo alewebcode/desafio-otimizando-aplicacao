@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 
-import { SideBar } from './components/SideBar';
+
 import { Content } from './components/Content';
 
 import { api } from './services/api';
@@ -9,6 +9,7 @@ import './styles/global.scss';
 
 import './styles/sidebar.scss';
 import './styles/content.scss';
+import SideBar from './components/SideBar';
 
 interface GenreResponseProps {
   id: number;
@@ -51,9 +52,11 @@ export function App() {
     })
   }, [selectedGenreId]);
 
-  function handleClickButton(id: number) {
+
+  const handleClickButton = useCallback((id: number) => {
     setSelectedGenreId(id);
-  }
+  }, [selectedGenreId])
+
 
   return (
     <div style={{ display: 'flex', flexDirection: 'row' }}>
